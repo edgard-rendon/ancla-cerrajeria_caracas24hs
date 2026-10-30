@@ -219,7 +219,7 @@ Escribir por WhatsApp</a>
 </div>
 
 <!-- Escena: sol, Ávila en papel cortado (con el Humboldt en la cima) y la silueta de Caracas -->
-<svg class="escena" viewBox="0 0 1440 640" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Atardecer sobre el Ávila con el Hotel Humboldt en la cima y la silueta de Caracas: la Catedral, el Capitolio, las torres de Parque Central, las Torres del Silencio, la Torre David y el obelisco de Altamira">
+<svg class="escena" viewBox="0 0 1440 640" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Atardecer sobre el Ávila con el Hotel Humboldt en la cima y la silueta de Caracas: la Catedral, el Capitolio, las torres de Parque Central, las Torres del Silencio y el obelisco de Altamira">
 <defs>
 <linearGradient id="g-sol" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE26A"/><stop offset="1" stop-color="#FFC21F"/></linearGradient>
 </defs>
@@ -265,15 +265,29 @@ Escribir por WhatsApp</a>
 <!-- Ávila, capa cercana (verde noche) -->
 <path d="M0 510 L120 488 L260 470 L400 452 L520 440 L660 446 L800 430 L940 438 L1080 424 L1220 442 L1340 456 L1440 466 L1440 640 L0 640Z" fill="#3B1A12"/>
 
-<!-- Silueta de Caracas en dos capas. Al frente, de izquierda a derecha: Catedral, Capitolio, Parque Central, Torres del Silencio, Torre David, obelisco de Altamira y torres del este -->
-<!-- capa de atrás, para dar profundidad -->
+<!-- Silueta de Caracas en dos capas. Al frente, de izquierda a derecha: Catedral, Capitolio, Parque Central, Torres del Silencio, obelisco de Altamira y torres del este -->
+<!-- capa lejana de edificios, más clara -->
+<g fill="#4E1D0D">
+<path d="M0 640 V470 H24 V440 H52 V480 H90 V430 H112 V412 H126 V430 H150 V470 H176 V446 H210 V400 H232 V380 H246 V400 H262 V460 H290 V420 H318 V640Z"/>
+<path d="M300 640 V350 H322 V330 H340 V350 H360 V640Z"/>
+<path d="M520 640 V420 H548 V380 H566 V360 H580 V380 H600 V430 H640 V390 H664 V350 H676 V322 H680 V350 H700 V400 H730 V370 H760 V340 H790 V372 H812 V410 H846 V380 H870 V640Z"/>
+<path d="M930 640 V430 H956 V400 H990 V360 H1008 V340 H1012 V360 H1030 V420 H1060 V640Z"/>
+<path d="M1150 640 V380 H1180 V350 H1210 V320 H1214 V350 H1240 V400 H1266 V640Z"/>
+<path d="M1280 640 V420 H1306 V390 H1330 V360 H1356 V400 H1380 V430 H1408 V400 H1440 V640Z"/>
+</g>
+<!-- capa media de edificios -->
 <g fill="#24100A">
 <path d="M0 640 V520 H60 V490 H110 V540 H150 V500 H200 V470 H250 V520 H300 V640Z"/>
 <path d="M500 640 V430 H560 V400 H610 V460 H660 V640Z"/>
+<path d="M650 640 V400 H690 V372 H716 V352 H722 V372 H744 V420 H780 V390 H812 V360 H840 V398 H866 V640Z"/>
 <path d="M780 640 V420 H830 V380 H880 V450 H920 V640Z"/>
 <path d="M1000 640 V400 H1060 V360 H1110 V420 H1150 V640Z"/>
 <path d="M1220 640 V390 H1280 V420 H1340 V370 H1390 V440 H1440 V640Z"/>
 </g>
+<g fill="#4E1D0D" opacity=".9">
+<rect x="700" y="400" width="6" height="8"/><rect x="760" y="430" width="6" height="8"/><rect x="820" y="410" width="6" height="8"/>
+</g>
+<!-- frente: edificios emblemáticos -->
 <g fill="#000">
 <path d="M0 640 V596 H1440 V640Z"/>
 <!-- Campanario de la Catedral -->
@@ -300,12 +314,6 @@ Escribir por WhatsApp</a>
 <rect x="546" y="416" width="44" height="224"/>
 <rect x="600" y="416" width="44" height="224"/>
 <rect x="540" y="540" width="110" height="100"/>
-<!-- Torre David -->
-<rect x="672" y="270" width="124" height="370"/>
-<rect x="688" y="250" width="92" height="22"/>
-<rect x="706" y="234" width="56" height="18"/>
-<rect x="732" y="200" width="5" height="36"/>
-<path d="M796 640 V470 H860 V640Z"/>
 <!-- Obelisco de Plaza Francia, Altamira -->
 <rect x="866" y="604" width="96" height="36"/>
 <rect x="880" y="588" width="68" height="18"/>
@@ -325,10 +333,6 @@ Escribir por WhatsApp</a>
 <rect class="ventana" x="452" y="350" width="10" height="12" style="animation-delay:.8s"/>
 <rect class="ventana" x="494" y="440" width="10" height="12" style="animation-delay:1.1s"/>
 <rect class="ventana" x="560" y="460" width="8" height="12" style="animation-delay:.7s"/>
-<rect class="ventana" x="694" y="300" width="10" height="12" style="animation-delay:.4s"/>
-<rect class="ventana" x="752" y="350" width="10" height="12" style="animation-delay:.9s"/>
-<rect class="ventana" x="712" y="430" width="10" height="12" style="animation-delay:1.4s"/>
-<rect class="ventana" x="768" y="520" width="10" height="12" style="animation-delay:1.6s"/>
 <rect class="ventana" x="996" y="410" width="10" height="12" style="animation-delay:.6s"/>
 <rect class="ventana" x="1040" y="480" width="10" height="12" style="animation-delay:1.2s"/>
 <rect class="ventana" x="1206" y="380" width="10" height="12" style="animation-delay:.3s"/>
