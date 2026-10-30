@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import type { Foto } from '../../config/tipos';
+import { buscarFoto } from '../../lib/imagenes';
+
+interface Props {
+  foto: Foto;
+  /** Anchos que el navegador puede elegir según la pantalla. */
+  anchos?: number[];
+  sizes?: string;
+  class?: string;
+}
+
+const { foto, anchos = [400, 700, 1000], sizes = '(min-width: 900px) 480px, 100vw', class: clase } = Astro.props;
+
+const imagen = buscarFoto(foto.src);
+// Nunca pedir versiones más grandes que el original.
+const anchosValidos = imagen ? anchos.filter((ancho) => ancho <= imagen.width) : [];
+const anchosFinales = imagen && anchosValidos.length === 0 ? [imagen.width] : anchosValidos;
+---
+
+{
+  imagen ? (
+    <Image src={imagen} alt={foto.alt} widths={anchosFinales} sizes={sizes} loading="lazy" class={clase} />
+  ) : (
+    <div role="img" aria-label={`Espacio para foto: ${foto.alt}`} class:list={['vacia', clase]}>
+      [Foto: {foto.alt}]
+    </div>
+  )
+}
+
+<style>
+  .vacia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    color: var(--papel-3);
+    font-size: 15px;
+  }
+</style>

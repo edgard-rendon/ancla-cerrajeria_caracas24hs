@@ -1,0 +1,32 @@
+---
+/**
+ * Borde con el perfil del Ávila en papel cortado, para pasar de una sección a otra.
+ * `color` es el de la sección que empieza (o la que termina, si `invertida`).
+ */
+interface Props {
+  color: string;
+  invertida?: boolean;
+}
+
+const { color, invertida = false } = Astro.props;
+---
+
+<svg class:list={['cresta', { invertida }]} viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+  <path
+    d="M0 90 L0 64 L140 50 L260 40 L360 30 L430 14 L470 8 L520 22 L640 36 L740 24 L820 6 L870 12 L910 2 L980 20 L1100 36 L1220 48 L1340 58 L1440 62 L1440 90Z"
+    fill={color}></path>
+</svg>
+
+<style>
+  .cresta {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: -1px;
+  }
+  .invertida {
+    transform: scaleY(-1);
+    margin-top: -1px;
+    margin-bottom: 0;
+  }
+</style>

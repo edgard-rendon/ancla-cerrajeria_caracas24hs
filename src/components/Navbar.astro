@@ -1,0 +1,108 @@
+---
+import { cliente } from '../config/cliente';
+import { enlaceTelefono } from '../lib/contacto';
+import Icono from './ui/Icono.astro';
+
+const { marca, navegacion } = cliente;
+---
+
+<header>
+  <div class="wrap nav">
+    <a href="#inicio" class="marca" aria-label={`${marca.nombre}, inicio`}>
+      <span class="marca-sol"><Icono nombre="llave" trazo={2.4} color="#000" /></span>
+      <span><b>{marca.corto}</b><small>Abierto las 24 horas</small></span>
+    </a>
+    <nav class="menu" aria-label="Principal">
+      {navegacion.map((enlace) => <a href={enlace.href}>{enlace.texto}</a>)}
+      <span class="en-vivo"><i></i>Atendiendo ahora</span>
+      <a class="btn btn-naranja" href={enlaceTelefono}>Llamar</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: var(--silueta);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 64px;
+  }
+  .marca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .marca-sol {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--atardecer);
+    display: grid;
+    place-items: center;
+    flex: none;
+  }
+  .marca b {
+    font-family: var(--fuente-display);
+    font-weight: 400;
+    font-size: 21px;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .marca small {
+    display: block;
+    font-size: 12px;
+    color: var(--atardecer);
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .menu a {
+    text-decoration: none;
+    color: var(--papel-2);
+  }
+  .menu a:hover {
+    color: var(--papel);
+  }
+  .menu .btn {
+    min-height: 42px;
+    padding: 8px 18px;
+    font-size: 15px;
+    color: var(--tinta);
+  }
+  .en-vivo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--papel-2);
+    font-weight: 600;
+  }
+  .en-vivo i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3bd16f;
+    box-shadow: 0 0 0 4px rgba(59, 209, 111, 0.18);
+  }
+  @media (max-width: 900px) {
+    .menu a:not(.btn),
+    .en-vivo {
+      display: none;
+    }
+  }
+</style>

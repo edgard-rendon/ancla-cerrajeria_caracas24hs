@@ -1,0 +1,10 @@
+// Despliegue en Cloudflare Workers (sitio estático).
+// `npm run build` genera ./dist y `npx wrangler deploy` publica esa carpeta.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ancla-cerrajeria-caracas24hs",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}

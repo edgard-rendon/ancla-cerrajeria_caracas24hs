@@ -1,0 +1,82 @@
+---
+import { cliente } from '../config/cliente';
+import { enlaceTelefono } from '../lib/contacto';
+import Icono from './ui/Icono.astro';
+
+const { marca, redes, contacto, credito } = cliente;
+const anio = new Date().getFullYear();
+---
+
+<footer>
+  <div class="wrap pie">
+    <a href="#inicio" class="marca">
+      <span class="marca-sol"><Icono nombre="llave" trazo={2.4} color="#000" /></span>
+      <span><b>{marca.corto}</b><small>Abierto las 24 horas</small></span>
+    </a>
+    <nav class="redes" aria-label="Redes sociales">
+      {redes.instagram && <a href={redes.instagram} target="_blank" rel="noopener">Instagram</a>}
+      {redes.tiktok && <a href={redes.tiktok} target="_blank" rel="noopener">TikTok</a>}
+      {redes.threads && <a href={redes.threads} target="_blank" rel="noopener">Threads</a>}
+      <a href={enlaceTelefono}>{contacto.telefonoVisible}</a>
+    </nav>
+    <span>© {anio} {marca.nombre}.{credito && ` ${credito}.`}</span>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background: var(--silueta);
+    border-top: 1px solid #222;
+    padding-block: 36px 40px;
+    color: var(--papel-3);
+    font-size: 14px;
+  }
+  @media (max-width: 760px) {
+    footer {
+      padding-bottom: 110px;
+    }
+  }
+  .pie {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .marca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .marca-sol {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--atardecer);
+    display: grid;
+    place-items: center;
+    flex: none;
+  }
+  .marca b {
+    font-family: var(--fuente-display);
+    font-weight: 400;
+    font-size: 21px;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--papel);
+    text-transform: uppercase;
+  }
+  .marca small {
+    display: block;
+    font-size: 12px;
+    color: var(--atardecer);
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .redes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+</style>

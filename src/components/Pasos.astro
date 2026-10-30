@@ -1,0 +1,73 @@
+---
+import { cliente } from '../config/cliente';
+
+const { pasos } = cliente;
+---
+
+<section class="bloque pasos-bloque" aria-labelledby="pasos-titulo">
+  <div class="wrap">
+    <h2 id="pasos-titulo">{pasos.titulo}</h2>
+    {pasos.descripcion && <p class="intro">{pasos.descripcion}</p>}
+    <ol class="pasos">
+      {
+        pasos.items.map((paso) => (
+          <li>
+            <h3>{paso.titulo}</h3>
+            <p>{paso.descripcion}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .pasos-bloque {
+    padding-top: 0;
+  }
+  .pasos {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 28px;
+    counter-reset: paso;
+  }
+  li {
+    counter-increment: paso;
+    position: relative;
+    padding-top: 68px;
+  }
+  li::before {
+    content: counter(paso);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--sol);
+    color: #1a1200;
+    font-family: var(--fuente-display);
+    font-size: 28px;
+    display: grid;
+    place-items: center;
+  }
+  li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 26px;
+    left: 64px;
+    right: -14px;
+    border-top: 2px dashed var(--noche-3);
+  }
+  h3 {
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+  p {
+    margin: 0;
+    color: var(--papel-2);
+  }
+</style>

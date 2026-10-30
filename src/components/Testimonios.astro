@@ -1,0 +1,55 @@
+---
+import { cliente } from '../config/cliente';
+
+const { testimonios } = cliente;
+---
+
+<section class="bloque" aria-labelledby="clientes-titulo">
+  <div class="wrap">
+    <h2 id="clientes-titulo">{testimonios.titulo}</h2>
+    {testimonios.descripcion && <p class="intro">{testimonios.descripcion}</p>}
+    <div class="testimonios">
+      {
+        testimonios.items.map((testimonio) => (
+          <figure>
+            <div class="estrellas" aria-label="5 de 5 estrellas">
+              ★★★★★
+            </div>
+            <blockquote>{testimonio.texto}</blockquote>
+            <figcaption>
+              {testimonio.autor}, {testimonio.detalle}
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 20px;
+  }
+  figure {
+    margin: 0;
+    background: var(--noche-2);
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .estrellas {
+    color: var(--sol);
+    letter-spacing: 3px;
+    font-size: 18px;
+  }
+  blockquote {
+    margin: 12px 0 0;
+    font-size: 18px;
+  }
+  figcaption {
+    margin-top: 16px;
+    color: var(--papel-3);
+    font-size: 15px;
+  }
+</style>

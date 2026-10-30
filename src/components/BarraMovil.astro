@@ -1,0 +1,41 @@
+---
+import { enlaceTelefono, enlaceWhatsApp } from '../lib/contacto';
+import Icono from './ui/Icono.astro';
+---
+
+<!-- En el teléfono, llamar y WhatsApp quedan siempre a mano. -->
+<div class="barra-movil">
+  <a class="btn btn-linea" href={enlaceTelefono}>
+    <Icono nombre="telefono" tamano={20} />
+    Llamar
+  </a>
+  <a class="btn btn-naranja" href={enlaceWhatsApp()} target="_blank" rel="noopener">
+    <Icono nombre="whatsapp" tamano={20} />
+    WhatsApp
+  </a>
+</div>
+
+<style>
+  .barra-movil {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    display: none;
+    gap: 10px;
+    padding: 10px max(12px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px))
+      max(12px, env(safe-area-inset-left, 0px));
+    background: var(--silueta);
+    border-top: 1px solid #222;
+  }
+  .btn {
+    flex: 1;
+    min-height: 54px;
+  }
+  @media (max-width: 760px) {
+    .barra-movil {
+      display: flex;
+    }
+  }
+</style>

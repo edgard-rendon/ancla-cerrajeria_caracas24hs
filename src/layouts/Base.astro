@@ -1,0 +1,109 @@
+---
+import { getImage } from 'astro:assets';
+import { cliente } from '../config/cliente';
+import { buscarFoto } from '../lib/imagenes';
+import { vistaPrevia } from '../lib/entorno';
+import '../styles/fuentes';
+import '../styles/global.css';
+
+interface Props {
+  /** Título de la pestaña y al compartir. Por defecto, el de `seo`. */
+  titulo?: string;
+  /** Descripción para Google y al compartir. Por defecto, la de `seo`. */
+  descripcion?: string;
+}
+
+const { marca, seo, contacto, redes, tienda, zonas, analitica } = cliente;
+const { titulo = seo.titulo, descripcion = seo.descripcion } = Astro.props;
+
+const canonica = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+
+// Imagen para compartir en WhatsApp, Instagram, etc. (hasta 1200 px de ancho, JPG).
+const fotoSeo = buscarFoto(seo.imagen);
+const imagenSeo = fotoSeo
+  ? await getImage({ src: fotoSeo, width: Math.min(1200, fotoSeo.width), format: 'jpg' })
+  : undefined;
+const urlImagenSeo = imagenSeo && Astro.site ? new URL(imagenSeo.src, Astro.site).href : undefined;
+
+// Datos estructurados para Google (schema.org/Locksmith).
+const datosEstructurados = {
+  '@context': 'https://schema.org',
+  '@type': seo.tipoNegocio,
+  name: marca.nombre,
+  description: seo.descripcion,
+  url: seo.url,
+  telephone: contacto.telefono,
+  slogan: marca.lema,
+  openingHours: 'Mo-Su 00:00-23:59',
+  areaServed: zonas.items.map((zona) => `${zona.nombre}, ${marca.ciudad}`),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Baruta',
+    addressRegion: marca.ciudad,
+    addressCountry: 'VE',
+    ...(tienda.direccion.startsWith('[') ? {} : { streetAddress: tienda.direccion }),
+  },
+  ...(urlImagenSeo ? { image: urlImagenSeo } : {}),
+  sameAs: Object.values(redes).filter(Boolean),
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    {vistaPrevia && <meta name="robots" content="noindex, nofollow" />}
+    {canonica && <link rel="canonical" href={canonica} />}
+    <meta name="theme-color" content="#FF7A00" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_VE" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    {canonica && <meta property="og:url" content={canonica} />}
+    {urlImagenSeo && <meta property="og:image" content={urlImagenSeo} />}
+    {imagenSeo && <meta property="og:image:width" content={String(imagenSeo.attributes.width ?? '')} />}
+    {imagenSeo && <meta property="og:image:height" content={String(imagenSeo.attributes.height ?? '')} />}
+    {urlImagenSeo && <meta property="og:image:alt" content={marca.nombre} />}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(datosEstructurados)} />
+
+    {
+      analitica?.cloudflare && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: analitica.cloudflare })}
+        />
+      )
+    }
+  </head>
+  <body>
+    <a href="#contenido-principal" class="sr-only saltar">Saltar al contenido</a>
+    {
+      vistaPrevia && (
+        <div class="vista-previa">
+          Vista previa · Propuesta de diseño para {marca.nombre}. Esta todavía no es su web oficial.
+        </div>
+      )
+    }
+    <slot />
+  </body>
+</html>
+
+<style>
+  .vista-previa {
+    background: #111;
+    border-bottom: 1px solid #262626;
+    color: var(--papel-3);
+    font-size: 13px;
+    text-align: center;
+    padding: 8px max(16px, env(safe-area-inset-right, 0px)) 8px max(16px, env(safe-area-inset-left, 0px));
+  }
+</style>

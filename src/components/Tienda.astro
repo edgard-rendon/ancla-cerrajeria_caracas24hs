@@ -1,0 +1,134 @@
+---
+import { cliente } from '../config/cliente';
+import { enlaceWhatsApp } from '../lib/contacto';
+import Icono from './ui/Icono.astro';
+import Foto from './ui/Foto.astro';
+import Cresta from './ui/Cresta.astro';
+
+const { tienda } = cliente;
+---
+
+<Cresta color="var(--atardecer)" />
+<section id="tienda" class="tienda">
+  <div class="wrap rejilla">
+    <div>
+      <h2>{tienda.titulo}</h2>
+      {tienda.descripcion && <p class="intro">{tienda.descripcion}</p>}
+      <div class="datos">
+        <div class="dato">
+          <Icono nombre="ubicacion" tamano={24} color="#000" />
+          <div><b>Dirección</b>{tienda.direccion}</div>
+        </div>
+        <div class="dato">
+          <Icono nombre="reloj" tamano={24} color="#000" />
+          <div>
+            <b>Horario de la tienda</b>
+            {tienda.horario.map((linea) => <span class="linea">{linea}</span>)}
+          </div>
+        </div>
+        <div class="dato">
+          <Icono nombre="bolsa" tamano={24} color="#000" />
+          <div>
+            <b>En la tienda</b>
+            <ul class="productos">{tienda.productos.map((producto) => <li>{producto}</li>)}</ul>
+          </div>
+        </div>
+      </div>
+      <div class="botones">
+        <a class="btn btn-negro" href={enlaceWhatsApp('Hola, quiero consultar productos de la tienda.')} target="_blank" rel="noopener"
+          >{tienda.ctaProductos}</a
+        >
+        {
+          tienda.mapa && (
+            <a class="btn btn-linea" href={tienda.mapa} target="_blank" rel="noopener">
+              Cómo llegar
+            </a>
+          )
+        }
+      </div>
+    </div>
+    <figure class="foto">
+      <Foto foto={tienda.foto} />
+    </figure>
+  </div>
+</section>
+<Cresta color="var(--atardecer)" invertida />
+
+<style>
+  .tienda {
+    background: var(--atardecer);
+    color: var(--tinta);
+    padding-block: 40px 88px;
+  }
+  .rejilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    gap: 40px;
+    align-items: center;
+  }
+  h2 {
+    color: var(--silueta);
+  }
+  .intro {
+    color: #2a1300;
+  }
+  .datos {
+    display: grid;
+    gap: 4px;
+    margin: 0 0 26px;
+  }
+  .dato {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 2px solid rgba(0, 0, 0, 0.18);
+  }
+  .dato:first-child {
+    border-top: 0;
+  }
+  .dato b,
+  .linea {
+    display: block;
+  }
+  .productos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .productos li {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn-linea {
+    color: #000;
+  }
+  .foto {
+    margin: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 6px solid var(--silueta);
+    background: var(--silueta);
+    aspect-ratio: 703 / 954;
+    max-height: 640px;
+    justify-self: center;
+    width: 100%;
+    max-width: 480px;
+  }
+  .foto :global(img),
+  .foto :global(.vacia) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

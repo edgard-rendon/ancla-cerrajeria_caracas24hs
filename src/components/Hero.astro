@@ -1,0 +1,95 @@
+---
+import { cliente } from '../config/cliente';
+import { enlaceTelefono, enlaceWhatsApp } from '../lib/contacto';
+import Icono from './ui/Icono.astro';
+import Escena from './escena/Escena.astro';
+import Flotantes from './escena/Flotantes.astro';
+
+const { hero, contacto } = cliente;
+---
+
+<section id="inicio" class="hero">
+  <div class="wrap">
+    <div class="texto">
+      <p class="sello"><i></i>{hero.sello}</p>
+      <h1>{hero.titulo[0]} <span>{hero.titulo[1]}</span></h1>
+      <p class="lead">{hero.subtitulo}</p>
+      <div class="botones">
+        <a class="btn btn-negro" href={enlaceWhatsApp()} target="_blank" rel="noopener">
+          <Icono nombre="whatsapp" />
+          {hero.ctaWhatsapp}
+        </a>
+        <a class="btn btn-linea" href={enlaceTelefono}>
+          <Icono nombre="telefono" tamano={20} trazo={2.2} />
+          {contacto.telefonoVisible}
+        </a>
+      </div>
+    </div>
+  </div>
+  <Escena />
+  <Flotantes />
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    background: linear-gradient(180deg, var(--brasa) 0%, var(--atardecer) 45%, #ffa22e 100%);
+    overflow: hidden;
+    color: var(--tinta);
+  }
+  /* El margen inferior deja el cielo libre para la escena, que escala con el ancho. */
+  .texto {
+    position: relative;
+    z-index: 2;
+    padding: 56px 0 calc(34vw + 24px);
+    max-width: 640px;
+  }
+  @media (max-width: 700px) {
+    .texto {
+      padding: 36px 0 calc(30vw + 8px);
+    }
+  }
+  .sello {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--silueta);
+    color: var(--papel);
+    border-radius: 999px;
+    padding: 7px 14px 7px 10px;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 0 22px;
+  }
+  .sello i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3bd16f;
+  }
+  h1 {
+    font-size: clamp(54px, 8vw, 112px);
+    color: var(--silueta);
+    line-height: 0.88;
+  }
+  h1 span {
+    display: block;
+    color: var(--papel);
+  }
+  .lead {
+    font-size: clamp(18px, 2vw, 21px);
+    font-weight: 500;
+    max-width: 34ch;
+    margin: 22px 0 0;
+    color: #2a1300;
+  }
+  .botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+  }
+  .btn-linea {
+    color: #000;
+  }
+</style>

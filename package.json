@@ -1,0 +1,26 @@
+{
+  "name": "ancla-cerrajeria-caracas24hs",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web de Cerrajería Caracas 24hs. Proyecto de Ancla.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@fontsource/anton": "^5.3.0",
+    "@fontsource/archivo": "^5.3.0",
+    "astro": "^7.4.2",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5"
+  }
+}

@@ -1,0 +1,108 @@
+---
+import { cliente } from '../config/cliente';
+import Foto from './ui/Foto.astro';
+
+const { trabajos } = cliente;
+---
+
+<section id="trabajos" class="bloque">
+  <div class="wrap">
+    <h2>{trabajos.titulo}</h2>
+    {trabajos.descripcion && <p class="intro">{trabajos.descripcion}</p>}
+    <div class="videos">
+      {
+        trabajos.videos.map((video) => (
+          <a class="video" href={video.url} target="_blank" rel="noopener">
+            <div class="marco">
+              {video.miniatura?.src ? (
+                <Foto foto={video.miniatura} anchos={[300, 500]} sizes="(min-width: 900px) 280px, 50vw" />
+              ) : (
+                <span class="falta">[Miniatura del video]</span>
+              )}
+              {video.vistas && <span class="vistas">{video.vistas} vistas</span>}
+              <span class="play">
+                <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">
+                  <circle cx="32" cy="32" r="31" fill="#FFD23F" />
+                  <path d="M26 21l18 11-18 11z" fill="#000" />
+                </svg>
+              </span>
+            </div>
+            <p>{video.titulo}</p>
+          </a>
+        ))
+      }
+    </div>
+    <div class="enlaces">
+      {
+        trabajos.enlaces.map((enlace) => (
+          <a class="btn btn-linea" href={enlace.href} target="_blank" rel="noopener">
+            {enlace.texto}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .videos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 16px;
+  }
+  .video {
+    text-decoration: none;
+  }
+  .marco {
+    aspect-ratio: 9 / 14;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--brasa), var(--atardecer) 55%, var(--silueta) 56%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 16px;
+    color: #ffffffb0;
+    font-size: 14px;
+    text-align: center;
+  }
+  .marco :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .falta {
+    position: relative;
+  }
+  .play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .vistas {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 1;
+    background: var(--silueta);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--papel);
+  }
+  .video p {
+    margin: 12px 0 0;
+    font-weight: 700;
+  }
+  .enlaces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+</style>
