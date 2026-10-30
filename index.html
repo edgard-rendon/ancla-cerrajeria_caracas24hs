@@ -78,9 +78,11 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:va
   .flota{animation:flota 6s ease-in-out infinite}
   .flota.b{animation-duration:7.5s;animation-delay:-2s}
   .flota.c{animation-duration:8.5s;animation-delay:-4s}
+  .flota.d{animation-duration:9s;animation-delay:-1s}
+  .flota.e{animation-duration:6.8s;animation-delay:-3s}
   .ventana{animation:enciende .6s ease-out both}
 }
-@keyframes flota{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-12px) rotate(var(--r,0deg))}}
+@keyframes flota{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes enciende{from{opacity:0}to{opacity:1}}
 
 /* ---------- ¿Qué te pasó? ---------- */
@@ -354,27 +356,39 @@ Escribir por WhatsApp</a>
 <rect class="ventana" x="1330" y="480" width="10" height="12" style="animation-delay:1.5s"/>
 </g>
 
-<!-- Llaves flotando, como en el mural -->
-<g class="flota" style="--r:-18deg">
-<g transform="translate(1250 30) rotate(-18)">
-<rect x="0" y="0" width="56" height="86" rx="18" fill="#000"/>
-<circle cx="28" cy="26" r="9" fill="#E2470F"/><circle cx="28" cy="52" r="6" fill="#444"/><circle cx="28" cy="70" r="6" fill="#444"/>
-<rect x="22" y="86" width="12" height="44" rx="3" fill="#BFBFBF"/>
-</g>
-</g>
-<g class="flota b" style="--r:24deg">
-<g transform="translate(1290 470) rotate(24)">
-<circle cx="0" cy="0" r="26" fill="none" stroke="#FFD23F" stroke-width="12"/>
-<rect x="22" y="-7" width="70" height="14" rx="3" fill="#FFD23F"/>
-<rect x="66" y="7" width="8" height="14" fill="#FFD23F"/><rect x="80" y="7" width="8" height="10" fill="#FFD23F"/>
-</g>
-</g>
-<g class="flota c" style="--r:-8deg">
-<g transform="translate(1330 330) rotate(-8)">
-<rect x="0" y="0" width="22" height="58" rx="11" fill="#1d4ed8"/><rect x="5" y="-12" width="12" height="16" rx="4" fill="#C9C9C9"/>
-<rect x="32" y="8" width="22" height="58" rx="11" fill="#000"/><rect x="37" y="-4" width="12" height="16" rx="4" fill="#C9C9C9"/>
-</g>
-</g>
+<!-- Flotando, como en el mural: tres llaves de ascensor, un Codiplug y una llave de carro -->
+<g class="flota "><g transform="translate(1296 52) rotate(-24)">
+<rect x="0" y="0" width="30" height="94" rx="15" fill="#D7263D"/>
+<circle cx="15" cy="80" r="5" fill="#FF8A1E"/>
+<circle cx="15" cy="16" r="13" fill="#B88A2A"/><circle cx="15" cy="16" r="9.5" fill="#E8C766"/>
+</g></g>
+<g class="flota b"><g transform="translate(1344 40) rotate(0)">
+<rect x="0" y="0" width="30" height="94" rx="15" fill="#111"/>
+<circle cx="15" cy="80" r="5" fill="#FF8A1E"/>
+<circle cx="15" cy="16" r="13" fill="#B88A2A"/><circle cx="15" cy="16" r="9.5" fill="#E8C766"/>
+</g></g>
+<g class="flota c"><g transform="translate(1392 52) rotate(24)">
+<rect x="0" y="0" width="30" height="94" rx="15" fill="#1D4ED8"/>
+<circle cx="15" cy="80" r="5" fill="#FF8A1E"/>
+<circle cx="15" cy="16" r="13" fill="#B88A2A"/><circle cx="15" cy="16" r="9.5" fill="#E8C766"/>
+</g></g>
+<!-- Codiplug -->
+<g class="flota d"><g transform="translate(800 150) rotate(-10)">
+<circle cx="-6" cy="-8" r="14" fill="none" stroke="#D9D9D9" stroke-width="4"/>
+<rect x="2" y="2" width="12" height="8" rx="2" fill="#D9D9D9"/>
+<rect x="0" y="6" width="70" height="80" rx="10" fill="#2A2A2A"/>
+<rect x="8" y="14" width="54" height="40" rx="4" fill="#9A9A9A"/>
+<rect x="12" y="20" width="46" height="3" fill="#777"/><rect x="12" y="28" width="46" height="3" fill="#777"/>
+<circle cx="24" cy="38" r="8" fill="#7BD34A"/>
+<circle cx="46" cy="38" r="6" fill="#555"/>
+<rect x="10" y="62" width="50" height="14" rx="3" fill="#C9C9C9"/>
+</g></g>
+<!-- llave de carro -->
+<g class="flota e"><g transform="translate(1290 300) rotate(-28)">
+<rect x="0" y="0" width="40" height="66" rx="14" fill="#111"/>
+<circle cx="20" cy="16" r="6" fill="#444"/><circle cx="20" cy="33" r="6" fill="#444"/><circle cx="20" cy="50" r="5" fill="#D7263D"/>
+<path d="M14 66 H27 V118 L23 124 H14 V112 L18 108 L14 104 V96 L18 92 L14 88 V80 L18 76 L14 72Z" fill="#CFCFCF"/>
+</g></g>
 </svg>
 </section>
 
